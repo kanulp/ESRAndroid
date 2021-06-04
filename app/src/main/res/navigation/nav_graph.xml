@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.kanulp.esrandroidtest.ui.list.NearByListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="NearBySearch"
         tools:layout="@layout/fragment_nearbylist">
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.kanulp.esrandroidtest.ui.details.DetailsFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Routes/POI"
         tools:layout="@layout/fragment_details">
 
         <action

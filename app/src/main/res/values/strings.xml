@@ -10,7 +10,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCO_JouaskDFG1z9RzscTM4Nggzfk6cPPc</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBWF9kHMu7mmKdeAbnCniczuoMSLYC8wOk</string>
 
 
 </resources>

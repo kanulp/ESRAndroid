@@ -12,9 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.kanulp.esrandroidtest.R
+import com.kanulp.esrandroidtest.data.model.Data
 import com.kanulp.esrandroidtest.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.reflect.Type
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -42,19 +46,20 @@ class NearByListFragment : Fragment() {
 
     }
     fun setupObserver(){
-        Log.d("MAIN","Calling SetupObserver")
         viewModel?.getNearByData()
         viewModel?.res?.observe(requireActivity(), {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    Log.d("MAIN", "GOT SUCCESS with array size : ")
                     val adapter = NearByAdapter(
                         it.data?.payload?.items,
                         requireContext(),
                         object : NearByAdapter.OnItemClickListener {
                             override fun onItemClick(position: Int) {
-                                //loadDetailPage(view, it.data!![position].id)
                                 Log.d("MAIN", "Clicked item ${it.data?.payload?.items}")
+                                //converting to string to pass in to next screen.
+                                val gson = Gson()
+                                val output = gson.toJson(it.data?.payload?.items!![position])
+                                loadDetailPage(view,output)
                             }
                         })
                     val layoutManager = LinearLayoutManager(requireContext())
@@ -69,9 +74,10 @@ class NearByListFragment : Fragment() {
             }
         })
     }
-//    private fun loadDetailPage(view:View?,id: Int) {
-//
-//        val action = FriendsFragmentDirections.actionFriendsFragmentToDetailFragment(id=id.toString())
-//        view?.let { Navigation.findNavController(it).navigate(action) }
-//    }
+    private fun loadDetailPage(view:View?,data: String) {
+
+        val action = NearByListFragmentDirections.actionFirstFragmentToSecondFragment(id=data)
+        view?.let { Navigation.findNavController(it).navigate(action) }
+    }
+
 }
